@@ -165,18 +165,27 @@ class EmployeePayrollData {
     id;
     salary;
     name;
+    gender;
+    startDate;
 
-    constructor(id, name, salary) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
+
+    constructor(...params) {
+        this.id = params[0];
+        this.name = params[1];
+        this.salary = params[2];
+        this.gender = params[3];
+        this.startDate = params[4];
     }
 
     get name() { return this.name; }
     set name(name) { this.name = name; }
 
     toString() {
-        return "id = " + this.id + ", name = " + this.name + ", salary = " + this.salary;
+         const options = {year : 'numeric', month : 'long', day : 'numeric'};
+        const empDate = this.startDate === undefined ? "undefined" : 
+        this.startDate.toLocaleDateString("en-US", options);
+        return "id = " + this.id + ", name = " + this.name + ", salary = " + this.salary + 
+        ", gender = " + this.gender + ", start date = " + empDate;
     }
 }
 
@@ -184,3 +193,5 @@ let employee = new EmployeePayrollData(1, "Mark", 30000);
 console.log(employee.toString());
 employee.name = "John";
 console.log(employee.toString());
+let newEmployee = new EmployeePayrollData(1, "Terrisa", 40000, "F", new Date());
+console.log(newEmployee.toString());
