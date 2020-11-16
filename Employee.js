@@ -141,3 +141,27 @@ console.log("Part working days: " + partWorkingDays);
 console.log("Non working days: " + nonWorkingDays);
 
 console.log("UC10 Array of objects with daily hours and wage : " + empDailyHrsAndWageArr); 
+
+class EmployeePayrollData {
+    id;
+    salary;
+    name;
+
+    constructor(id, name, salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    get name() { return this.name; }
+    set name(name) { this.name = name; }
+
+    toString() {
+        return "id = " + this.id + ", name = " + this.name + ", salary = " + this.salary;
+    }
+}
+
+let employee = new EmployeePayrollData(1, "Mark", 30000);
+console.log(employee.toString());
+employee.name = "John";
+console.log(employee.toString());
