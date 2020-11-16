@@ -164,7 +164,6 @@ console.log("UC 11D nonWorkingDayNums : " + nonWorkingDayNums);
 class EmployeePayrollData {
     id;
     salary;
-    name;
     gender;
     startDate;
 
@@ -177,8 +176,14 @@ class EmployeePayrollData {
         this.startDate = params[4];
     }
 
-    get name() { return this.name; }
-    set name(name) { this.name = name; }
+    get name() { return this._name; }
+    set name(name) {
+        const nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+        if (nameRegex.test(name)) {
+            this._name = name;
+        }
+        else throw 'Name is incorrect!!';
+    }
 
     toString() {
          const options = {year : 'numeric', month : 'long', day : 'numeric'};
@@ -191,7 +196,11 @@ class EmployeePayrollData {
 
 let employee = new EmployeePayrollData(1, "Mark", 30000);
 console.log(employee.toString());
-employee.name = "John";
-console.log(employee.toString());
+try {
+    let employee = new EmployeePayrollData(2, "John", 50000);
+    console.log(employee.toString());
+} catch (e) {
+    console.error(e);
+}
 let newEmployee = new EmployeePayrollData(1, "Terrisa", 40000, "F", new Date());
 console.log(newEmployee.toString());
